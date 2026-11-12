@@ -536,7 +536,9 @@ function initIntersectionAnimations() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
+        entry.target.style.transform = entry.target.classList.contains('editorial-quote-block')
+          ? 'translateX(0)'
+          : 'translateY(0)';
         observer.unobserve(entry.target);
       }
     });
@@ -547,7 +549,9 @@ function initIntersectionAnimations() {
 
   animatedElements.forEach(el => {
     el.style.opacity = '0';
-    el.style.transform = 'translateY(24px)';
+    el.style.transform = el.classList.contains('editorial-quote-block')
+      ? 'translateX(48px)'
+      : 'translateY(24px)';
     el.style.transition = 'opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
     observer.observe(el);
   });
