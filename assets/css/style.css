@@ -693,92 +693,285 @@ button {
   margin-bottom: 3.5rem;
 }
 
-.historia-grid {
+.historia-carousel {
   display: grid;
-  grid-template-columns: 1.05fr 1.35fr;
-  gap: clamp(2.5rem, 5vw, 5rem);
-  align-items: start;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: clamp(2rem, 4vw, 4rem);
 }
 
-/* Coluna Esquerda: Fotografia e Testemunhos do Flyer 1 */
-.historia-visual-col {
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
-  position: sticky;
-  top: calc(var(--header-height) + 2rem);
-}
-
-.editorial-photo-card {
+.historia-carousel-visual {
   position: relative;
-  background: var(--color-bg-surface);
-  border: 1px solid rgba(218, 184, 167, 0.2);
-  border-radius: var(--radius-sm);
-  padding: 0.85rem;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-}
-
-.editorial-photo-card::before {
-  content: "";
-  position: absolute;
-  top: -6px;
-  left: -6px;
-  width: 24px;
-  height: 24px;
-  border-top: 2px solid var(--color-rose-earth);
-  border-left: 2px solid var(--color-rose-earth);
-}
-
-.editorial-photo-card::after {
-  content: "";
-  position: absolute;
-  bottom: -6px;
-  right: -6px;
-  width: 24px;
-  height: 24px;
-  border-bottom: 2px solid var(--color-rose-earth);
-  border-right: 2px solid var(--color-rose-earth);
-}
-
-.editorial-img-wrap {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 3;
+  min-height: clamp(380px, 42vw, 560px);
+  margin: 0;
   overflow: hidden;
-  background-color: #000;
+  background: #10110e;
 }
 
-.editorial-img-wrap img {
+.historia-carousel-visual::after {
+  position: absolute;
+  inset: 45% 0 0;
+  background: linear-gradient(transparent, rgba(10, 11, 9, 0.78));
+  content: "";
+  pointer-events: none;
+}
+
+.historia-carousel-visual img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s ease;
+  transition: transform 0.7s ease;
 }
 
-.editorial-photo-card:hover .editorial-img-wrap img {
-  transform: scale(1.04);
+.historia-carousel:hover .historia-carousel-visual img {
+  transform: scale(1.025);
 }
 
-.photo-caption-bar {
+.historia-photo-caption {
+  position: absolute;
+  z-index: 1;
+  right: 1.5rem;
+  bottom: 1.4rem;
+  left: 1.5rem;
+  color: var(--color-cream);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.historia-carousel-copy {
   display: flex;
+  min-width: 0;
+  flex-direction: column;
   justify-content: space-between;
+}
+
+.historia-carousel-topline {
+  display: flex;
   align-items: center;
-  padding-top: 0.75rem;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.historia-carousel-kicker,
+.historia-quote-index {
+  color: var(--color-rose-earth);
   font-family: var(--font-display);
   font-size: 0.7rem;
-  color: var(--color-rose-beige);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
-.photo-coords {
-  letter-spacing: 0.1em;
-  color: var(--color-olive-light);
+.historia-quote-index {
+  color: var(--color-text-muted);
+  white-space: nowrap;
 }
 
-/* Mini Cards de Depoimento Afetivo (Flyers) */
-.flyer-quotes-stack {
+.historia-quote-content {
+  margin: auto 0;
+  padding: 2rem 0;
+}
+
+.historia-quote-mark {
+  display: block;
+  height: 2.5rem;
+  color: var(--color-rose-earth);
+  font-family: Georgia, serif;
+  font-size: 5rem;
+  line-height: 1;
+}
+
+.historia-carousel-quote {
+  color: var(--color-cream);
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+}
+
+.historia-carousel-author {
+  margin-top: 1.5rem;
+  color: var(--color-rose-earth);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.historia-lower-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+  align-items: start;
+  gap: clamp(2rem, 4vw, 4rem);
+  margin-top: clamp(2rem, 4vw, 4rem);
+}
+
+.mina-water-animation {
+  width: 100%;
+  aspect-ratio: 260 / 200;
+}
+
+.mina-water-animation svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.mina-water-pipe {
+  fill: none;
+  stroke: #59615c;
+  stroke-linecap: round;
+  stroke-width: 17;
+}
+
+.mina-water-pipe-highlight {
+  fill: none;
+  stroke: #a4aca5;
+  stroke-linecap: round;
+  stroke-width: 2;
+}
+
+.mina-water-pipe-mouth {
+  fill: #414944;
+  stroke: #929b93;
+  stroke-width: 2;
+}
+
+.mina-water-pipe-opening {
+  fill: #111512;
+}
+
+.mina-water-stream-bed {
+  fill: none;
+  stroke: rgba(111, 208, 211, 0.42);
+  stroke-linecap: round;
+  stroke-width: 9;
+}
+
+.mina-water-stream {
+  fill: none;
+  stroke: #d3fbf7;
+  stroke-dasharray: 12 9;
+  stroke-linecap: round;
+  stroke-width: 3;
+  animation: minaWaterFlow 0.7s linear infinite;
+}
+
+.mina-water-drop {
+  fill: #d3fbf7;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: minaWaterDrop 1s ease-in infinite;
+}
+
+.mina-water-drop-two {
+  animation-delay: 0.2s;
+}
+
+.mina-water-drop-three {
+  animation-delay: 0.4s;
+}
+
+.mina-water-ripple {
+  fill: none;
+  stroke: #8ad9d8;
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: minaWaterRipple 1.1s ease-out infinite;
+}
+
+@keyframes minaWaterFlow {
+  to { stroke-dashoffset: -34; }
+}
+
+@keyframes minaWaterDrop {
+  0% { opacity: 0; transform: translateY(-4px) scale(0.8); }
+  20% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(24px) scale(0.55); }
+}
+
+@keyframes minaWaterRipple {
+  0% { opacity: 0.8; transform: scale(0.45, 0.8); }
+  100% { opacity: 0; transform: scale(1.35, 1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mina-water-stream,
+  .mina-water-drop,
+  .mina-water-ripple {
+    animation: none;
+  }
+}
+
+.historia-carousel-controls {
   display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.75rem;
+}
+
+.historia-carousel-arrow {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(218, 184, 167, 0.3);
+  border-radius: 50%;
+  color: var(--color-cream);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.historia-carousel-arrow:hover {
+  border-color: var(--color-rose-earth);
+  background: var(--color-rose-earth);
+  color: var(--color-bg-darkest);
+}
+
+.historia-carousel-arrow:focus-visible,
+.historia-carousel-dot:focus-visible {
+  outline: 2px solid var(--color-rose-earth);
+  outline-offset: 3px;
+}
+
+.historia-carousel-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+}
+
+.historia-carousel-dot {
+  width: 0.65rem;
+  height: 0.65rem;
+  padding: 0;
+  border: 1px solid var(--color-rose-beige);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.historia-carousel-dot.active {
+  width: 1.8rem;
+  border-color: var(--color-rose-earth);
+  border-radius: 999px;
+  background: var(--color-rose-earth);
+}
+
+.historia-context {
+  min-width: 0;
+  margin: 0;
 }
 
 .flyer-quote-pill {
@@ -1935,13 +2128,21 @@ button {
     display: none;
   }
 
-  .historia-grid {
+  .historia-carousel {
     grid-template-columns: 1fr;
-    gap: 3rem;
   }
 
-  .historia-visual-col {
-    position: static;
+  .historia-carousel-visual {
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+
+  .historia-carousel-copy {
+    gap: 1.5rem;
+  }
+
+  .historia-lower-grid {
+    grid-template-columns: 1fr;
   }
 
   .caixa-grid {
@@ -2036,6 +2237,18 @@ button {
   .hero-meta-items {
     flex-direction: column;
     gap: 0.75rem;
+  }
+
+  .historia-carousel-visual {
+    aspect-ratio: 4 / 3;
+  }
+
+  .historia-carousel-copy {
+    gap: 1rem;
+  }
+
+  .historia-carousel-quote {
+    font-size: 1.3rem;
   }
 
   .carousel-thumbs-grid {

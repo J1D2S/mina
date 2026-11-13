@@ -7,6 +7,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initScrollEffects();
   initMobileNav();
+  initHistoryCarousel();
   initVideoCarousel();
   initMapInteractions();
   initFlyerModal();
@@ -261,6 +262,71 @@ function initVideoCarousel() {
 
   // Inicializa com o primeiro vídeo
   updateVideo(0);
+}
+
+function initHistoryCarousel() {
+  const slides = [
+    {
+      image: 'assets/images/janara1.png',
+      alt: 'Janara em registro audiovisual sobre a Mina d’Água',
+      caption: 'Janara · Memória da Mina',
+      quote: 'A mina não dava apenas água. Ela ensinava a dividir, a esperar a vez do vizinho, a carregar junto. Foi carregando água que aprendemos a carregar o destino da nossa própria comunidade.',
+      author: 'Janara'
+    },
+    {
+      image: 'assets/images/wonei1.png',
+      alt: 'Wonei em registro audiovisual sobre a Mina d’Água',
+      caption: 'Wonei · Memória da Mina',
+      quote: 'Naquela época não havia iluminação pública no Santa Marta e os caminhos eram muito escuros. Muitas histórias de assombração viraram lenda da favela: a mulher do latão, a mulher de branco, o lobisomem e tantas outras lendas contadas na fila da bica sob as estrelas.',
+      author: 'Wonei'
+    },
+    {
+      image: 'assets/images/mina_bica_detalhe.jpg',
+      alt: 'A bica de pedra da Mina d’Água no Santa Marta com água correndo para o tanque',
+      caption: 'Praça da Mina · Santa Marta',
+      quote: 'Saudade da minha infância aí nessa Mina. Bons tempos.',
+      author: 'Adriana Cardoso · Moradora do Santa Marta'
+    }
+  ];
+
+  const image = document.getElementById('historiaCarouselImage');
+  const caption = document.getElementById('historiaPhotoCaption');
+  const quote = document.getElementById('historiaCarouselQuote');
+  const author = document.getElementById('historiaCarouselAuthor');
+  const counter = document.getElementById('historiaQuoteIndex');
+  const prevBtn = document.getElementById('historiaPrevBtn');
+  const nextBtn = document.getElementById('historiaNextBtn');
+  const dots = document.querySelectorAll('.historia-carousel-dot');
+
+  if (!image || !caption || !quote || !author || !counter) return;
+
+  let currentIndex = 0;
+
+  function showSlide(index) {
+    currentIndex = (index + slides.length) % slides.length;
+    const slide = slides[currentIndex];
+
+    image.src = slide.image;
+    image.alt = slide.alt;
+    caption.textContent = slide.caption;
+    quote.textContent = slide.quote;
+    author.textContent = slide.author;
+    counter.textContent = `${String(currentIndex + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+
+    dots.forEach((dot, dotIndex) => {
+      const isActive = dotIndex === currentIndex;
+      dot.classList.toggle('active', isActive);
+      dot.setAttribute('aria-pressed', String(isActive));
+    });
+  }
+
+  prevBtn?.addEventListener('click', () => showSlide(currentIndex - 1));
+  nextBtn?.addEventListener('click', () => showSlide(currentIndex + 1));
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      showSlide(Number.parseInt(dot.getAttribute('data-index'), 10));
+    });
+  });
 }
 
 /* ==========================================================================
@@ -549,7 +615,7 @@ function initIntersectionAnimations() {
   // Exclui .caixa-main-frame, .caixa-inset-frame e .trans-card daqui —
   // eles são gerenciados pelo initCaixaPhotoAnimations específico abaixo.
   const animatedElements = document.querySelectorAll(
-    '.section-title, .section-subtitle, .memoria-quote, .editorial-photo-card, .editorial-quote-block, .map-canvas-container, .flyer-quote-pill'
+    '.section-title, .section-subtitle, .memoria-quote, .historia-carousel, .editorial-quote-block, .map-canvas-container, .flyer-quote-pill'
   );
 
   const observer = new IntersectionObserver((entries) => {

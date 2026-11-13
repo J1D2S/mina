@@ -172,45 +172,49 @@
           <p class="section-subtitle">D'ÁGUA — FONTE DA VIDA</p>
         </div>
 
-        <div class="historia-grid">
-          
-          <!-- Coluna Esquerda: Fotografia da Bica e Testemunhos Históricos -->
-          <div class="historia-visual-col">
-            <div class="editorial-photo-card">
-              <div class="editorial-img-wrap">
-                <img src="assets/images/mina_bica_detalhe.jpg" alt="A bica de pedra da Mina d'Água no Santa Marta coberta de musgo com a água fresca correndo para o tanque" loading="lazy" width="1024" height="768">
-              </div>
-              <div class="photo-caption-bar">
-                <span>Praça da Mina · Santa Marta</span>
-                <span class="photo-coords">22° 56' 55" S · 43° 11' 35" O</span>
-              </div>
+        <div class="historia-carousel" id="historiaCarousel" aria-label="Carrossel de memórias da Mina d'Água">
+          <figure class="historia-carousel-visual">
+            <img
+              id="historiaCarouselImage"
+              src="assets/images/janara1.png"
+              alt="Janara junto à Mina d'Água no Santa Marta"
+              width="393"
+              height="308">
+            <figcaption class="historia-photo-caption" id="historiaPhotoCaption">Janara · Memória da Mina</figcaption>
+          </figure>
+
+          <div class="historia-carousel-copy">
+            <div class="historia-carousel-topline">
+              <span class="historia-carousel-kicker">Vozes da Mina</span>
+              <span class="historia-quote-index" id="historiaQuoteIndex" aria-live="polite">01 / 03</span>
             </div>
 
-            <!-- Mini depoimentos afetivos extraídos dos registros comunitários -->
-            <div class="flyer-quotes-stack">
-              <div class="flyer-quote-pill">
-                <p class="flyer-quote-text">“Só quem viveu sabe o valor dessa foto.”</p>
-                <span class="flyer-quote-author">Luiz Henrique · Morador do Santa Marta</span>
-              </div>
-              <div class="flyer-quote-pill">
-                <p class="flyer-quote-text">“Saudade da minha infância aí nessa Mina. Bons tempos.”</p>
-                <span class="flyer-quote-author">Adriana Cardoso · Moradora do Santa Marta</span>
-              </div>
-              <div class="flyer-quote-pill">
-                <p class="flyer-quote-text">“Tomei banho nessa Mina.”</p>
-                <span class="flyer-quote-author">Maicon David · Memória Local</span>
-              </div>
+            <div class="historia-quote-content" aria-live="polite" aria-atomic="true">
+              <span class="historia-quote-mark" aria-hidden="true">“</span>
+              <blockquote class="historia-carousel-quote" id="historiaCarouselQuote">
+                A mina não dava apenas água. Ela ensinava a dividir, a esperar a vez do vizinho, a carregar junto. Foi carregando água que aprendemos a carregar o destino da nossa própria comunidade.
+              </blockquote>
+              <p class="historia-carousel-author" id="historiaCarouselAuthor">Janara</p>
             </div>
 
-            <button type="button" class="btn-open-flyer" data-flyer="flyer1">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              Ver Documento Original (Flyer 01)
-            </button>
+            <div class="historia-carousel-controls" aria-label="Controles das memórias">
+              <button type="button" class="historia-carousel-arrow" id="historiaPrevBtn" aria-label="Memória anterior">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <div class="historia-carousel-dots" role="group" aria-label="Selecionar memória">
+                <button type="button" class="historia-carousel-dot active" data-index="0" aria-label="Memória de Janara" aria-pressed="true"></button>
+                <button type="button" class="historia-carousel-dot" data-index="1" aria-label="Memória de Wonei" aria-pressed="false"></button>
+                <button type="button" class="historia-carousel-dot" data-index="2" aria-label="Memória de Adriana" aria-pressed="false"></button>
+              </div>
+              <button type="button" class="historia-carousel-arrow" id="historiaNextBtn" aria-label="Próxima memória">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
           </div>
+        </div>
 
-          <!-- Coluna Direita: Narrativa Histórica e Destaque Gráfico -->
-          <div class="historia-text-col">
-            
+        <div class="historia-lower-grid">
+          <div class="historia-text-col historia-context">
             <p class="historia-lead">
               <strong>Antes dos canos e do asfalto, havia a sede e havia a floresta.</strong> No coração da rocha do Morro Santa Marta, brotou a mina d'água que sustentou famílias, reuniu vizinhos, forjou a solidariedade e deu origem à Associação Escola Sem Muros e ao Grupo ECO.
             </p>
@@ -223,24 +227,22 @@
                 No verão, as fontes minguavam e a disputa para conseguir uma lata de água era dramática. A fila na Mina se estendia até a madrugada. Quem chegava primeiro ajudava quem vinha com as latas equilibradas na cabeça subindo as vielas íngremes de terra e pedra.
               </p>
             </div>
-
-            <!-- Frase em Destaque Gráfico Principal -->
-            <div class="editorial-quote-block">
-              <blockquote>
-                “A mina não dava apenas água. Ela ensinava a dividir, a esperar a vez do vizinho, a carregar junto. Foi carregando água que aprendemos a carregar o destino da nossa própria comunidade.”
-              </blockquote>
-            </div>
-
-            <!-- Histórias de Assombração e Memória Noturna -->
-            <div class="folklore-callout">
-              <div class="folklore-icon" aria-hidden="true">☾</div>
-              <p>
-                Naquela época não havia iluminação pública no Santa Marta e os caminhos eram muito escuros. Muitas histórias de assombração viraram lenda da favela: a mulher do latão, a mulher de branco, o lobisomem e tantas outras lendas contadas na fila da bica sob as estrelas.
-              </p>
-            </div>
-
           </div>
 
+          <div class="mina-water-animation" aria-hidden="true">
+            <svg viewBox="110 8 260 200" focusable="false">
+              <path class="mina-water-pipe" d="M360 25H218" />
+              <path class="mina-water-pipe-highlight" d="M359 19H219" />
+              <ellipse class="mina-water-pipe-mouth" cx="218" cy="25" rx="7" ry="12" />
+              <ellipse class="mina-water-pipe-opening" cx="218" cy="25" rx="3.5" ry="7" />
+              <path class="mina-water-stream-bed" d="M211 25H208A55 55 0 0 0 153 80V198" />
+              <path class="mina-water-stream" d="M211 25H208A55 55 0 0 0 153 80V198" />
+              <circle class="mina-water-drop mina-water-drop-one" cx="185" cy="45" r="3" />
+              <circle class="mina-water-drop mina-water-drop-two" cx="158" cy="72" r="2.5" />
+              <circle class="mina-water-drop mina-water-drop-three" cx="153" cy="145" r="2.8" />
+              <ellipse class="mina-water-ripple" cx="153" cy="201" rx="28" ry="4" />
+            </svg>
+          </div>
         </div>
 
       </div>
