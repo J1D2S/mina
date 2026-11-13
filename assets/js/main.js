@@ -271,26 +271,38 @@ function initMapInteractions() {
   const mapPin = document.getElementById('mapPinHotspot');
   const viewLocalBtn = document.getElementById('viewLocalBtn');
   const viewAmploBtn = document.getElementById('viewAmploBtn');
+  const viewDentroBtn = document.getElementById('viewDentroBtn');
   const mapInfoCard = document.getElementById('mapInfoCard');
 
   if (!mapImg) return;
 
   const views = {
+    amplo: {
+      src: 'assets/images/mapa3.png',
+      alt: 'Vista aérea panorâmica da Zona Sul do Rio de Janeiro destacando Botafogo e o Morro Santa Marta',
+      pinTop: '46%',
+      pinLeft: 'calc(50.5% + 40px)',
+      pinLabel: 'Favela Santa Marta',
+      title: 'Contexto Metropolitano · Botafogo',
+      desc: 'Entre o Maciço da Tijuca e a enseada de Botafogo, o Morro Santa Marta ergue-se com sua história secular e sua nascente que há gerações abastece os moradores.'
+    },
     local: {
-      src: 'assets/images/mapa1.jpg',
-      alt: 'Vista aérea tridimensional da Favela Santa Marta e a localização da Mina d\'Água',
+      src: 'assets/images/mapa4.png',
+      alt: 'Vista aérea local do Morro Santa Marta cercado pela vegetação e pela comunidade',
       pinTop: '38%',
-      pinLeft: '45.5%',
+      pinLeft: 'calc(45.5% + 15px)',
+      pinLabel: 'Favela Santa Marta',
       title: 'Praça da Mina · Santa Marta',
       desc: 'Localizada no miolo da encosta, próxima à Padaria da Grazi e à Praça das Lavadeiras. A nascente natural corre da rocha florestal do morro em direção à comunidade.'
     },
-    amplo: {
-      src: 'assets/images/mapa_rio_amplo.jpg',
-      alt: 'Vista aérea panorâmica da Zona Sul do Rio de Janeiro destacando Botafogo e o Morro Santa Marta',
-      pinTop: '46%',
-      pinLeft: '50.5%',
-      title: 'Contexto Metropolitano · Botafogo',
-      desc: 'Entre o Maciço da Tijuca e a enseada de Botafogo, o Morro Santa Marta ergue-se com sua história secular e sua nascente que há gerações abastece os moradores.'
+    dentro: {
+      src: 'assets/images/mapa5.png',
+      alt: 'Vista aérea de perto da comunidade no interior do Morro Santa Marta',
+      pinTop: 'calc(50% + 105px)',
+      pinLeft: 'calc(50% - 145px)',
+      pinLabel: '',
+      title: 'Dentro do Morro · Santa Marta',
+      desc: 'Uma vista próxima da comunidade e de suas construções entre as áreas de mata do Morro Santa Marta.'
     }
   };
 
@@ -307,6 +319,12 @@ function initMapInteractions() {
       if (mapPin) {
         mapPin.style.top = v.pinTop;
         mapPin.style.left = v.pinLeft;
+        const pinLabel = mapPin.querySelector('.pin-label-tag');
+        if (pinLabel) {
+          pinLabel.textContent = v.pinLabel;
+          pinLabel.hidden = !v.pinLabel;
+        }
+        mapPin.setAttribute('aria-label', v.pinLabel ? `Marcador: ${v.pinLabel}` : 'Marcador de localização no Morro Santa Marta');
       }
 
       if (mapInfoCard) {
@@ -317,10 +335,9 @@ function initMapInteractions() {
       }
     }, 250);
 
-    if (viewLocalBtn && viewAmploBtn) {
-      viewLocalBtn.classList.toggle('active', viewKey === 'local');
-      viewAmploBtn.classList.toggle('active', viewKey === 'amplo');
-    }
+    viewLocalBtn?.classList.toggle('active', viewKey === 'local');
+    viewAmploBtn?.classList.toggle('active', viewKey === 'amplo');
+    viewDentroBtn?.classList.toggle('active', viewKey === 'dentro');
   }
 
   if (viewLocalBtn) {
@@ -328,6 +345,9 @@ function initMapInteractions() {
   }
   if (viewAmploBtn) {
     viewAmploBtn.addEventListener('click', () => setMapView('amplo'));
+  }
+  if (viewDentroBtn) {
+    viewDentroBtn.addEventListener('click', () => setMapView('dentro'));
   }
 
   if (mapPin && mapInfoCard) {

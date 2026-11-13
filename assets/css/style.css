@@ -1532,8 +1532,8 @@ button {
 /* Marcador Gráfico da Mina no Santa Marta */
 .map-pin-hotspot {
   position: absolute;
-  top: 38%;
-  left: 45.5%;
+  top: 46%;
+  left: calc(50.5% + 40px);
   transform: translate(-50%, -50%);
   pointer-events: auto;
   cursor: pointer;

@@ -455,8 +455,9 @@
 
           <!-- Alternador de Visão Aérea -->
           <div class="mapa-views-toggle" role="group" aria-label="Alternar ângulo do mapa">
-            <button type="button" class="map-view-btn active" id="viewLocalBtn">Vista Local (Santa Marta)</button>
-            <button type="button" class="map-view-btn" id="viewAmploBtn">Panorama Rio de Janeiro</button>
+            <button type="button" class="map-view-btn active" id="viewAmploBtn">Panorama Rio de Janeiro</button>
+            <button type="button" class="map-view-btn" id="viewLocalBtn">Vista Local</button>
+            <button type="button" class="map-view-btn" id="viewDentroBtn">Dentro do Morro</button>
           </div>
         </div>
 
@@ -464,8 +465,8 @@
         <div class="map-canvas-container" id="mapCanvasContainer">
           
           <img 
-            src="assets/images/mapa1.jpg" 
-            alt="Vista aérea tridimensional da Favela Santa Marta incrustada nas encostas florestais de Botafogo" 
+            src="assets/images/mapa3.png"
+            alt="Vista aérea panorâmica do Rio de Janeiro, incluindo o Morro Santa Marta"
             class="map-viewport-img" 
             id="mapViewportImg"
             width="1024" 
@@ -475,12 +476,12 @@
           <div class="map-overlays">
             
             <!-- Marcador Gráfico da Mina d'Água -->
-            <div class="map-pin-hotspot" id="mapPinHotspot" role="button" tabindex="0" aria-label="Marcador da Mina d'Água na encosta do Santa Marta">
+            <div class="map-pin-hotspot" id="mapPinHotspot" role="button" tabindex="0" aria-label="Marcador: Favela Santa Marta" data-latitude="-22.9484771" data-longitude="-43.1946622">
               <div class="map-pin-anchor">
                 <div class="pin-radar-ring" aria-hidden="true"></div>
                 <div class="pin-radar-ring" aria-hidden="true"></div>
                 <div class="pin-core-dot"></div>
-                <span class="pin-label-tag">Mina d'Água · Santa Marta</span>
+                <span class="pin-label-tag">Favela Santa Marta</span>
               </div>
             </div>
 
@@ -488,10 +489,10 @@
 
           <!-- Card Flutuante de Informação Territorial -->
           <div class="map-info-floating-card" id="mapInfoCard">
-            <div class="map-card-kicker">Ponto de Referência Comunitário</div>
-            <h3 class="map-card-title">Praça da Mina · Santa Marta</h3>
+            <div class="map-card-kicker">Panorama do Território</div>
+            <h3 class="map-card-title">Contexto Metropolitano · Botafogo</h3>
             <p class="map-card-text">
-              Localizada no miolo da encosta, próxima à Padaria da Grazi e à Praça das Lavadeiras. A nascente natural corre da rocha florestal do morro em direção à comunidade.
+              Entre o Maciço da Tijuca e a enseada de Botafogo, o Morro Santa Marta ergue-se com sua história secular e sua nascente que há gerações abastece os moradores.
             </p>
           </div>
 
