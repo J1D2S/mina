@@ -509,102 +509,48 @@ function initFlyerModal() {
 }
 
 /* ==========================================================================
-   6. ÁUDIO AMBIENTE SINTETIZADO (SOM DA NASCENTE VIA WEB AUDIO API)
+   6. PLAYER DO SOM DA MINA D'ÁGUA
    ========================================================================== */
 function initAmbientAudio() {
   const audioBtn = document.getElementById('audioToggleBtn');
-  if (!audioBtn) return;
+  const modal = document.getElementById('waterAudioModal');
+  const closeBtn = document.getElementById('waterAudioModalClose');
+  const player = document.getElementById('waterAudioIframe');
+  if (!audioBtn || !modal || !closeBtn || !player) return;
 
-  let audioCtx = null;
-  let isPlaying = false;
-  let noiseNode = null;
-  let gainNode = null;
-  let filter1 = null;
-  let filter2 = null;
+  const embedUrl = 'https://www.youtube-nocookie.com/embed/j9kF2JRjVXY?autoplay=1&rel=0';
 
-  function createWaterSound() {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-    // Cria gerador de ruído rosa suave filtrado (simulando água corrente e gotejamento)
-    const bufferSize = 2 * audioCtx.sampleRate;
-    const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-    const output = noiseBuffer.getChannelData(0);
-
-    let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
-    for (let i = 0; i < bufferSize; i++) {
-      const white = Math.random() * 2 - 1;
-      b0 = 0.99886 * b0 + white * 0.0555179;
-      b1 = 0.99332 * b1 + white * 0.0750759;
-      b2 = 0.96900 * b2 + white * 0.1538520;
-      b3 = 0.86650 * b3 + white * 0.3104856;
-      b4 = 0.55000 * b4 + white * 0.5329522;
-      b5 = -0.7616 * b5 - white * 0.0168980;
-      output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.05;
-      b6 = white * 0.115926;
-    }
-
-    noiseNode = audioCtx.createBufferSource();
-    noiseNode.buffer = noiseBuffer;
-    noiseNode.loop = true;
-
-    // Filtro Passa-Faixa para som de água cristalina
-    filter1 = audioCtx.createBiquadFilter();
-    filter1.type = 'bandpass';
-    filter1.frequency.value = 650;
-    filter1.Q.value = 1.2;
-
-    filter2 = audioCtx.createBiquadFilter();
-    filter2.type = 'lowpass';
-    filter2.frequency.value = 1400;
-
-    // Ganho suave e gradual
-    gainNode = audioCtx.createGain();
-    gainNode.gain.setValueAtTime(0.001, audioCtx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.12, audioCtx.currentTime + 1.5);
-
-    noiseNode.connect(filter1);
-    filter1.connect(filter2);
-    filter2.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-
-    noiseNode.start();
+  function openPlayer() {
+    player.src = embedUrl;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    audioBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
   }
 
-  function stopWaterSound() {
-    if (gainNode && audioCtx) {
-      gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.8);
-      setTimeout(() => {
-        if (noiseNode) {
-          try { noiseNode.stop(); } catch (err) {}
-          noiseNode.disconnect();
-        }
-        if (audioCtx && audioCtx.state !== 'closed') {
-          audioCtx.close();
-        }
-      }, 850);
-    }
+  function closePlayer() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    player.src = 'about:blank';
+    audioBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    audioBtn.focus();
   }
 
   audioBtn.addEventListener('click', () => {
-    if (!isPlaying) {
-      try {
-        createWaterSound();
-        isPlaying = true;
-        audioBtn.classList.add('playing');
-        audioBtn.setAttribute('aria-pressed', 'true');
-        const textSpan = audioBtn.querySelector('.audio-btn-text');
-        if (textSpan) textSpan.textContent = 'Pausar Som';
-      } catch (e) {
-        console.warn('Web Audio não suportado ou bloqueado:', e);
-      }
-    } else {
-      stopWaterSound();
-      isPlaying = false;
-      audioBtn.classList.remove('playing');
-      audioBtn.setAttribute('aria-pressed', 'false');
-      const textSpan = audioBtn.querySelector('.audio-btn-text');
-      if (textSpan) textSpan.textContent = 'Som da Água';
-    }
+    if (modal.classList.contains('open')) closePlayer();
+    else openPlayer();
+  });
+
+  closeBtn.addEventListener('click', closePlayer);
+
+  modal.addEventListener('click', event => {
+    if (event.target === modal) closePlayer();
+  });
+
+  window.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && modal.classList.contains('open')) closePlayer();
   });
 }
 
@@ -650,6 +596,7 @@ function initCaixaPhotoAnimations() {
   const caixaSection   = document.getElementById('caixa-pedra');
   const visualCol      = caixaSection ? caixaSection.querySelector('.caixa-visual-col') : null;
   const insetFrame     = caixaSection ? caixaSection.querySelector('.caixa-inset-frame') : null;
+  const gallery        = caixaSection ? caixaSection.querySelector('.transform-gallery') : null;
 
   if (!caixaSection || !visualCol) return;
 
@@ -660,6 +607,26 @@ function initCaixaPhotoAnimations() {
 
     insetFrame.addEventListener('click', () => {
       openCaixaLightbox(insetFrame.querySelector('img'));
+    });
+  }
+
+  if (gallery) {
+    const galleryItems = gallery.querySelectorAll('.transform-gallery-item');
+    const galleryCount = gallery.querySelector('.transform-gallery-count');
+
+    if (galleryCount) {
+      galleryCount.textContent = `${String(galleryItems.length).padStart(2, '0')} fotografias`;
+    }
+
+    galleryItems.forEach((item, index) => {
+      const itemIndex = item.querySelector('.transform-gallery-index');
+      if (itemIndex) itemIndex.textContent = String(index + 1).padStart(2, '0');
+    });
+
+    gallery.querySelectorAll('.transform-gallery-image').forEach(button => {
+      button.addEventListener('click', () => {
+        openCaixaLightbox(button.querySelector('img'));
+      });
     });
   }
 
